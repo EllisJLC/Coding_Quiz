@@ -24,7 +24,9 @@ To display skillset of HTML and CSS as well as ocasional JavaScript through proj
 
 ### Images of working site:
 
-![]
+![Program sample](./assets/images/program-1.png)
+
+![Program sample 2](./assets/images/program-2.png)
 
 ## Installation
 The webpage was launched using Github Pages at https://ellisjlc.github.io/Coding_Quiz/.

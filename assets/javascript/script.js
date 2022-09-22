@@ -75,19 +75,19 @@ start_button.addEventListener("click", function(event) { // Event listener for s
 });
 
 function generate_question () {
-    let used_question_number = Math.floor(Math.random()*questions_answers.length)
-    let random_question = questions_answers[used_question_number];
-    questions_answers.splice(used_question_number,1);
-    let current_question = random_question["question"];
-    let answer_list = random_question["answers"];
-    questionE.textContent = current_question;
-    let true_answer = answer_list[0];
-    for (let position = 0; position < 4; position++) {
-        random_position = Math.floor(Math.random()*answer_list.length) //generate random position
+    let used_question_number = Math.floor(Math.random()*questions_answers.length) // Generate random index
+    let random_question = questions_answers[used_question_number]; // get random question from list
+    questions_answers.splice(used_question_number,1); // remove question from list
+    let current_question = random_question["question"]; // get question from object
+    let answer_list = random_question["answers"]; // get answers from object
+    questionE.textContent = current_question; // set question text
+    let true_answer = answer_list[0]; // get correct answer from array
+    for (let position = 0; position < 4; position++) { // loop through answers
+        random_position = Math.floor(Math.random()*answer_list.length) //generate random answer
         answers.children[position].textContent = answer_list[random_position]; // Set card answers
-        answer_list.splice(random_position, 1);
+        answer_list.splice(random_position, 1); // remove answer from array
     }
-    return (true_answer);
+    return (true_answer); // return the correct answer
 }
 
 function save_name() {
