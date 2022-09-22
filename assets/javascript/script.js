@@ -13,6 +13,8 @@ let questionNo = document.querySelector("#question-number"); // question number
 let score_phase = document.querySelector("#score-phase"); // save scores phase
 let saved_scores = document.querySelector("#scores");
 
+let footer = document.querySelector("footer");
+
 let questionset = [
     {question: "Which language is used to program dynamic effects in a webpage?",answers: ["JavaScript", "CSS", "HTML", "Sea Sharp"],},
     {question: "Which of the following CSS styling qualities positions content at a set position regardless of scrolling?", answers: ["fixed","absolute","relative","static"]},
@@ -23,6 +25,7 @@ let questionset = [
 
 let questions_answers;
 let correct;
+let scores_list;
 
 start_button.addEventListener("click", function(event) { // Event listener for start button
     if (event.target.id==="start") {
@@ -88,9 +91,11 @@ function generate_question () {
 }
 
 function save_name() {
-    console.log(scores_list)
     let name = false;
-
+    scores_list = JSON.parse(localStorage.getItem("scores_list"));
+    if (!scores_list || scores_list === null) {
+        scores_list = [];
+    }
     // first one you add is already
     // 2nd one you add you have to look at the first 1 and and compare
     // third an on you will have to check all of therm until you find the correct spot
@@ -98,7 +103,6 @@ function save_name() {
 
     // push it to the array
     // then call the sort function
-    hide_game();
     
     if (scores_list.length <= 3 || correct > scores_list[2][1] || scores_list === []){
         let new_score;
@@ -111,19 +115,38 @@ function save_name() {
             }
             new_score = [name,correct];
         }
-        }
-        if  (scores_list === []) {
-            scores_list = new_score;
-            localStorage.setItem("scores_list", JSON.stringify(scores_list));
-        }
-        else if (scores_list.length === 2) {
-        if (scores_list[1][1]<correct) {
-            if (scores_list[1][2]<correct) {
+        if  (scores_list.length === 0) {
+            localStorage.setItem("scores_list", JSON.stringify([new_score]));
+        } else if (scores_list.length === 1) {
+            console.log(scores_list)
+            if (scores_list[0][1] < correct) {
                 scores_list.splice(0,0,new_score);
-                localStorage.setItem("scores_list", JSON.stringify(scores_list));
             } else {
                 scores_list.splice(1,0,new_score);
-                localStorage.setItem("scores_list", JSON.stringify(scores_list));
+            }
+        } else if (scores_list.length === 2) {
+            if (scores_list[1][1]<correct) {
+                if (scores_list[0][1]<correct) {
+                    scores_list.splice(0,0,new_score);
+                    localStorage.setItem("scores_list", JSON.stringify(scores_list));
+                } else {
+                    scores_list.splice(1,0,new_score);
+                    localStorage.setItem("scores_list", JSON.stringify(scores_list));
+                }
+            }
+        } else {
+            if (correct > scores_list[2][1]) { // If score is greater than 3rd position score 
+                if (correct > scores_list[1][1]) { // If score is greater than 2nd top score
+                    if (correct > scores_list[0][1]) { // If score is greater than top score
+                        scores_list.splice(0,0,new_score); // Add as top score
+                        scores_list.splice(3,1); // Remove old 3rd position score
+                    } else {
+                        scores_list.splice(1,0,new_score); // Add as new second score
+                        scores_list.splice(3,1); // Remove old 3rd position score
+                    }
+                } else {
+                    scores_list.splice(2,1,new_score); // Replace 3rd position score
+                }
             }
         }
     }
@@ -131,24 +154,25 @@ function save_name() {
 };
 
 function show_scores () {
-    let scores_list = (localStorage.getItem("scores_list"));
-    if (scores_list.length === 1) {
-        saved_scores.textContent = scores_list[0][0] + ":   " + scores_list[0][1] + " point(s)";
+    scores_list = JSON.parse(localStorage.getItem("scores_list"));
+    saved_scores.children[0].textContent = scores_list[0][0] + ":   " + scores_list[0][1] + " point(s)";
+    if (saved_scores.length < 1) {
+        saved_scores.children[1].textContent = scores_list[1][0] + ":   " + scores_list[1][1] + " point(s)";
     }
-    console.log(scores_list)
-    console.log(scores_list[0][1]);
 }
 
 function show_game() { // Use to show game content
     start_phase.setAttribute("style","display:none"); // Hides start button
     score_phase.setAttribute("style","display:none"); // Hides highscores
     game_phase.setAttribute("style", "display:block"); // Shows game info
+    footer.setAttribute("style", "display:none");
 }
 
 function hide_game() {
     start_phase.setAttribute("style","display:block"); // Shows start button
     score_phase.setAttribute("style","display:block"); // Shows highscores
     game_phase.setAttribute("style", "display:none"); // Hides game info
+    footer.setAttribute("style","display:block")
     correct = 0; // Reset score
 }
 
