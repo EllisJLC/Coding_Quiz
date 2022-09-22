@@ -10,43 +10,48 @@
 </head>
 <body>
     <h1>Let's Test your Programming Ability!</h1>
+
+    <section id="start-phase">
+        <section id="start-card">
+            <p id="start">Start!</p>
+        </section>
+    </section>
+
     <section id="game-phase">
         <section id="timer-flex">
-            <p id="timer">Time left: </p>
+            <p id="timer">💣Time left: 60s</p>
         </section>
         <section id="scoring-flex">
             <p id="score">score</p>
             <p id="question-number">questoin number</p>
             <p id="question">question</p>
             <ul id="answers">
-                <li class="answer-card">
+                <li class="answer-card" name="answer-card">
                     test
                 </li>
-                <li class="answer-card">
+                <li class="answer-card" name="answer-card">
                     test
                 </li>
-                <li class="answer-card">
+                <li class="answer-card" name="answer-card">
                     test
                 </li>
-                <li class="answer-card">
+                <li class="answer-card" name="answer-card">
                     test
                 </li>
             </ul>
         </section>
     </section>
-    <section id="start-phase">
-        <section id="start-card">
-            <p id="start">Start!</p>
-        </section>
-    </section>
     
     <section id="score-phase">
         <h2 id="highscores-title">Highscores</h2>
-        <ol>
+        <ol id="scores">
+            <li></li>
             <li></li>
             <li></li>
         </ol>
     </section>
     <footer>Made in JavaScript by Jia Liang (Ellison) Chen</footer>
+
+    <script src="./assets/javascript/script.js"></script>
 </body>
 </html>

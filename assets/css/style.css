@@ -16,6 +16,36 @@ h1 { /*Styling for header*/
     padding-bottom: 20px;
 }
 
+/*Start Phase*/
+
+    #start-phase {
+        display:block;
+    }
+
+    #start-card { /*Styling for positioning of start button (star-card id)*/
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding-top: 80px;
+    }
+
+    #start:hover {
+        cursor:pointer;
+    }
+
+    #start { /*Styling for start button (start id)*/
+        text-align: center;
+        background-color: white;
+        color: red;
+        display: inline-block;
+        font-size: 150px;
+        border: red 15px solid;
+        border-radius: 40px;
+        /*280px bottom padding/margin to account for spacing, keeps header to the bottom*/
+    }
+
+
+
 /*Game Phase*/
 
     #game-phase {
@@ -82,35 +112,15 @@ h1 { /*Styling for header*/
         height: 100px;
         margin: 20px;
     }
+
+    .answer-card:hover {
+        cursor:grabbing;
+    }
     
-/*Start Phase*/
-
-    #start-phase {
-        display:none;
-    }
-
-    #start-card { /*Styling for positioning of start button (star-card id)*/
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        padding-top: 80px;
-    }
-
-    #start { /*Styling for start button (start id)*/
-        text-align: center;
-        background-color: white;
-        color: red;
-        display: inline-block;
-        font-size: 150px;
-        border: red 15px solid;
-        border-radius: 40px;
-        /*280px bottom padding/margin to account for spacing, keeps header to the bottom*/
-    }
-
 /*Score phase*/
 
     #score-phase {
-        /* display: none; */
+        display: none;
     }
 
     h2 {
@@ -133,7 +143,9 @@ h1 { /*Styling for header*/
 footer { /*Footer element styling*/
     text-align: center;
     background-color: aliceblue;
-    margin-top: auto;
-    padding: 40px;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    margin-bottom: 0px;
 }
 
